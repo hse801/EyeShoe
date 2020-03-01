@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">sinbal</string>
+    <string name="connect">연결</string>
+    <string name="send">보내기</string>
 </resources>
