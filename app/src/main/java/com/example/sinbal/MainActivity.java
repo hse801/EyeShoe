@@ -16,6 +16,8 @@ import app.akexorcist.bluetotohspp.library.BluetoothSPP;
 import app.akexorcist.bluetotohspp.library.BluetoothState;
 import app.akexorcist.bluetotohspp.library.DeviceList;
 
+import android.media.MediaPlayer;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
+
        // bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() { //데이터 수신
          //   public void onDataReceived(byte[] data, String message) {
            //     Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             TextView distance33 = findViewById(R.id.distance3);
 
 
+
             public void onDataReceived(byte[] data, String message) { //데이터 수신용 코드 추가
 
 
@@ -52,11 +56,15 @@ public class MainActivity extends AppCompatActivity {
                 distance22.setText(array[0].concat("cm"));
                 distance33.setText(array[1].concat("cm"));
 
-                //double distance2 = Double.parseDouble(array[0]);
+                double distance2 = Double.parseDouble(array[0]);
                 //double distance3 = Double.parseDouble(array[1]);
-
+                if(distance2<300){
+                    final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
+                    mp.start();
+                }
             }
         });
+
 
         bt.setBluetoothConnectionListener(new BluetoothSPP.BluetoothConnectionListener() { //연결됐을 때
 
