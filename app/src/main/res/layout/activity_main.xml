@@ -27,6 +27,18 @@
         android:layout_marginTop="8dp"
         android:text="@string/send" />
 
+    <TextView
+        android:id="@+id/distance2"
+        android:layout_width="match_parent"
+        android:layout_height="234dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/distance3"
+        android:layout_width="match_parent"
+        android:layout_height="259dp"
+        android:text="TextView" />
+
 
 </LinearLayout>
 

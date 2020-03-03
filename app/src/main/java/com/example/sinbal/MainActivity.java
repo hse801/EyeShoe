@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import app.akexorcist.bluetotohspp.library.BluetoothSPP;
@@ -33,13 +34,32 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-        bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() { //데이터 수신
-            public void onDataReceived(byte[] data, String message) {
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+       // bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() { //데이터 수신
+         //   public void onDataReceived(byte[] data, String message) {
+           //     Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+            //}
+        //});
+        bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() {
+            TextView distance22 = findViewById(R.id.distance2);
+            TextView distance33 = findViewById(R.id.distance3);
+
+
+            public void onDataReceived(byte[] data, String message) { //데이터 수신용 코드 추가
+
+
+                String[] array = message.split(",");
+
+                distance22.setText(array[0].concat("cm"));
+                distance33.setText(array[1].concat("cm"));
+
+                //double distance2 = Double.parseDouble(array[0]);
+                //double distance3 = Double.parseDouble(array[1]);
+
             }
         });
 
         bt.setBluetoothConnectionListener(new BluetoothSPP.BluetoothConnectionListener() { //연결됐을 때
+
             public void onDeviceConnected(String name, String address) {
                 Toast.makeText(getApplicationContext()
                         , "Connected to " + name + "\n" + address
