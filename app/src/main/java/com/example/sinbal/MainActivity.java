@@ -57,8 +57,13 @@ public class MainActivity extends AppCompatActivity {
                 distance33.setText(array[1].concat("cm"));
 
                 double distance2 = Double.parseDouble(array[0]);
-                //double distance3 = Double.parseDouble(array[1]);
-                if(distance2<300){
+                double distance3 = Double.parseDouble(array[1]);
+                if(distance2<30){
+                    final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
+                    mp.start();
+
+                }
+                if(distance3<30){
                     final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
                     mp.start();
                 }
