@@ -30,14 +30,16 @@
     <TextView
         android:id="@+id/distance2"
         android:layout_width="match_parent"
-        android:layout_height="234dp"
-        android:text="TextView" />
+        android:layout_height="126dp"
+        android:text="TextView"
+        android:textSize="36sp" />
 
     <TextView
         android:id="@+id/distance3"
         android:layout_width="match_parent"
-        android:layout_height="259dp"
-        android:text="TextView" />
+        android:layout_height="134dp"
+        android:text="TextView"
+        android:textSize="36sp" />
 
 
 </LinearLayout>

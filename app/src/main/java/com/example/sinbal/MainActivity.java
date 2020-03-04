@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataReceived(byte[] data, String message) { //데이터 수신용 코드 추가
 
 
+
                 String[] array = message.split(",");
 
                 distance22.setText(array[0].concat("cm"));
@@ -61,13 +62,14 @@ public class MainActivity extends AppCompatActivity {
                 if(distance2<30){
                     final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
                     mp.start();
-
                 }
-                if(distance3<30){
-                    final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
+                if(distance3<30) {
+                    final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.thunder);
                     mp.start();
                 }
+
             }
+
         });
 
 
