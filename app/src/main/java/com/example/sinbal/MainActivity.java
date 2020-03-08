@@ -18,7 +18,6 @@ import app.akexorcist.bluetotohspp.library.DeviceList;
 
 import android.media.MediaPlayer;
 
-
 public class MainActivity extends AppCompatActivity {
 
     private BluetoothSPP bt;
@@ -29,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bt = new BluetoothSPP(this); //Initializing
 
+
         if (!bt.isBluetoothAvailable()) { //블루투스 사용 불가
             Toast.makeText(getApplicationContext()
                     , "Bluetooth is not available"
@@ -37,11 +37,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-       // bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() { //데이터 수신
-         //   public void onDataReceived(byte[] data, String message) {
-           //     Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-            //}
+        // bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() { //데이터 수신
+        //   public void onDataReceived(byte[] data, String message) {
+        //     Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+        //}
         //});
+
         bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() {
             TextView distance22 = findViewById(R.id.distance2);
             TextView distance33 = findViewById(R.id.distance3);
@@ -51,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
             public void onDataReceived(byte[] data, String message) { //데이터 수신용 코드 추가
 
 
-
                 String[] array = message.split(",");
 
                 distance22.setText(array[0].concat("cm"));
@@ -59,18 +59,39 @@ public class MainActivity extends AppCompatActivity {
 
                 double distance2 = Double.parseDouble(array[0]);
                 double distance3 = Double.parseDouble(array[1]);
+
                 if(distance2<30){
-                    final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
-                    mp.start();
+                    MyApplication myApp = (MyApplication) getApplication();
+                    int num = myApp.getGlobalValue();
+
+                    if(num == 1) {
+
+                        final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
+                        mp.start();
+
+                        myApp.setGlobalValue(0);
+                    }
+                    if(distance2<10) {
+                        final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.close);
+                        mp.start();
+                    }
+
                 }
-                if(distance3<30) {
+                else if(distance2>30){
+                    MyApplication myApp = (MyApplication) getApplication();
+                    myApp.setGlobalValue(1);
+                }
+
+               if(distance3<10){
                     final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.thunder);
                     mp.start();
                 }
-
             }
 
+
+
         });
+
 
 
         bt.setBluetoothConnectionListener(new BluetoothSPP.BluetoothConnectionListener() { //연결됐을 때
@@ -149,6 +170,4 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }
-    }
-}
-
+    } }
