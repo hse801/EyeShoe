@@ -37,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-       // bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() { //데이터 수신
-         //   public void onDataReceived(byte[] data, String message) {
-           //     Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-            //}
+        // bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() { //데이터 수신
+        //   public void onDataReceived(byte[] data, String message) {
+        //     Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+        //}
         //});
 
         bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() {
@@ -64,15 +64,15 @@ public class MainActivity extends AppCompatActivity {
                     MyApplication myApp = (MyApplication) getApplication();
                     int num = myApp.getGlobalValue();
 
-                   if(num == 1) {
+                    if(num == 1) {
 
-                       final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
-                       mp.start();
-
-                       myApp.setGlobalValue(0);
-                   }
-                   if(distance2<10) {
                         final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
+                        mp.start();
+
+                        myApp.setGlobalValue(0);
+                    }
+                    if(distance2<10) {
+                        final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.close);
                         mp.start();
                     }
 
@@ -82,10 +82,10 @@ public class MainActivity extends AppCompatActivity {
                     myApp.setGlobalValue(1);
                 }
 
-               /* if(distance3<30){
-                    final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
+               if(distance3<10){
+                    final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.thunder);
                     mp.start();
-                }*/
+                }
             }
 
 
@@ -170,6 +170,4 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }
-    }
-}
-
+    } }
