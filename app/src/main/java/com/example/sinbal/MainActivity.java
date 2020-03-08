@@ -18,7 +18,6 @@ import app.akexorcist.bluetotohspp.library.DeviceList;
 
 import android.media.MediaPlayer;
 
-
 public class MainActivity extends AppCompatActivity {
 
     private BluetoothSPP bt;
@@ -28,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bt = new BluetoothSPP(this); //Initializing
+
 
         if (!bt.isBluetoothAvailable()) { //블루투스 사용 불가
             Toast.makeText(getApplicationContext()
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
            //     Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
             //}
         //});
+
         bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() {
             TextView distance22 = findViewById(R.id.distance2);
             TextView distance33 = findViewById(R.id.distance3);
@@ -58,17 +59,39 @@ public class MainActivity extends AppCompatActivity {
 
                 double distance2 = Double.parseDouble(array[0]);
                 double distance3 = Double.parseDouble(array[1]);
+
                 if(distance2<30){
-                    final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
-                    mp.start();
+                    MyApplication myApp = (MyApplication) getApplication();
+                    int num = myApp.getGlobalValue();
+
+                   if(num == 1) {
+
+                       final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
+                       mp.start();
+
+                       myApp.setGlobalValue(0);
+                   }
+                   if(distance2<10) {
+                        final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
+                        mp.start();
+                    }
 
                 }
-                if(distance3<30){
+                else if(distance2>30){
+                    MyApplication myApp = (MyApplication) getApplication();
+                    myApp.setGlobalValue(1);
+                }
+
+               /* if(distance3<30){
                     final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
                     mp.start();
-                }
+                }*/
             }
+
+
+
         });
+
 
 
         bt.setBluetoothConnectionListener(new BluetoothSPP.BluetoothConnectionListener() { //연결됐을 때
