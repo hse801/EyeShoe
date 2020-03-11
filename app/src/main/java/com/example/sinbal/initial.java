@@ -17,22 +17,36 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 public class initial extends AppCompatActivity {
 
     EditText userSize;
+    EditText userHeight;
     CheckBox checkSize;
-    SharedPreferences ShoeSize;
+    SharedPreferences UserInfo;
     SharedPreferences.Editor editor;
 
     public static final int sub = 1001; /*다른 액티비티를 띄우기 위한 요청코드(상수)*/
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initial);
 
         userSize = (EditText) findViewById(R.id.inputSize);
+        userHeight = (EditText) findViewById(R.id.inputHeight);
         checkSize = (CheckBox) findViewById(R.id.checkSize);
 
-        ShoeSize = getSharedPreferences("ShoeSize", 0);
-        editor = ShoeSize.edit();
+        checkSize.setChecked(true);
+        UserInfo = getSharedPreferences("UserInfo", 0);
+        editor = UserInfo.edit();
 
+
+
+        int inputSizeValue = UserInfo.getInt("inputSize", 0);
+        if(inputSizeValue > 0){
+            userSize.setText(Integer.toString(inputSizeValue));
+        }
+        int inputHeightValue = UserInfo.getInt("inputHeight", 0);
+        if(inputHeightValue > 0){
+            userHeight.setText(Integer.toString(inputHeightValue));
+        }
+        //userHeight.setText(UserInfo.getString("inputHeight", ""));
         //userSize.setText(ShoeSize.getInt("InputSize", 0));
         //setPreference(ShoeSize, Integer.parseInt(input InputSize.getText().toString()));
 
@@ -51,10 +65,25 @@ public class initial extends AppCompatActivity {
         super.onPause();
 
         if(checkSize.isChecked() == true){
-            editor.putInt("InputSize",250);
+            editor.putInt("inputSize", Integer.parseInt(userSize.getText().toString()));
+            editor.commit();
         } else{
-            editor.putInt("InputSize",0);
+            editor.putInt("inputSize",0);
+            editor.commit();
         }
-        editor.commit();
-    }
+        if(checkSize.isChecked() == true){
+            editor.putInt("inputHeight", Integer.parseInt(userHeight.getText().toString()));
+            editor.commit();
+        } else{
+            editor.putInt("inputHeight",0);
+            editor.commit();
+        }
+//        if(UserInfo.getBoolean("checkSize_enabled", false)){
+//            userSize.setText(UserInfo.getString("inputSize", ""));
+//            checkSize.setChecked(true);}
+//
+//            if(UserInfo.getBoolean("checkSize_enabled", false)){
+//                userHeight.setText(UserInfo.getString("inputHeight", ""));
+//                checkSize.setChecked(true);}
+}
 }

@@ -32,6 +32,14 @@
         android:layout_marginTop="150dp"
         android:inputType="number"
         android:hint="발 사이즈를 입력하세요." />
+    <EditText
+        android:id="@+id/inputHeight"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:inputType="number"
+        android:hint="키를 입력하세요." />
 
     <CheckBox
         android:id="@+id/checkSize"
