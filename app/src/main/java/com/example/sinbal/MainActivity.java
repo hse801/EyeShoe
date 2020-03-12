@@ -47,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
             TextView distance22 = findViewById(R.id.distance2);
             TextView distance33 = findViewById(R.id.distance3);
 
+            Intent intent = getIntent();
+            int size = intent.getIntExtra("size",0);
+            double final_size = size*2.5*2; // 2값 바꾸기
 
 
             public void onDataReceived(byte[] data, String message) { //데이터 수신용 코드 추가
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 double distance2 = Double.parseDouble(array[0]);
                 double distance3 = Double.parseDouble(array[1]);
 
-                if(distance2<30){
+                if(distance2<final_size){
                     MyApplication myApp = (MyApplication) getApplication();
                     int num = myApp.getGlobalValue();
 

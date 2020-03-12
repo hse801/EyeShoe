@@ -46,6 +46,11 @@ public class initial extends AppCompatActivity {
         if(inputHeightValue > 0){
             userHeight.setText(Integer.toString(inputHeightValue));
         }
+
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra("size",inputSizeValue);
+        startActivity(intent);
+
         //userHeight.setText(UserInfo.getString("inputHeight", ""));
         //userSize.setText(ShoeSize.getInt("InputSize", 0));
         //setPreference(ShoeSize, Integer.parseInt(input InputSize.getText().toString()));
