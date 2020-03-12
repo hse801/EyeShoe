@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,11 +22,16 @@ import android.media.MediaPlayer;
 public class MainActivity extends AppCompatActivity {
 
     private BluetoothSPP bt;
+    int size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = getIntent(); //변수 받아오기 추가 부분
+        size = intent.getIntExtra("size",0);
+        Log.d("MainActivity", "Size = "+size); //log에 띄워줌
+        //Toast.makeText(this,"Size = "+size, Toast.LENGTH_LONG).show(); //화면에 띄워줌
         bt = new BluetoothSPP(this); //Initializing
 
 
@@ -36,25 +42,25 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-
         // bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() { //데이터 수신
         //   public void onDataReceived(byte[] data, String message) {
         //     Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
         //}
         //});
 
+
         bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() {
             TextView distance22 = findViewById(R.id.distance2);
             TextView distance33 = findViewById(R.id.distance3);
 
-            Intent intent = getIntent();
-            int size = intent.getIntExtra("size",0);
-            double final_size = size*2.5*2; // 2값 바꾸기
+
+            double final_size = MainActivity.this.size*2.5*2; // 2값 바꾸기
 
 
             public void onDataReceived(byte[] data, String message) { //데이터 수신용 코드 추가
 
 
+                Log.d("MainActivity", "Final size = "+final_size);
                 String[] array = message.split(",");
 
                 distance22.setText(array[0].concat("cm"));
@@ -91,11 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-
-
         });
-
-
 
         bt.setBluetoothConnectionListener(new BluetoothSPP.BluetoothConnectionListener() { //연결됐을 때
 

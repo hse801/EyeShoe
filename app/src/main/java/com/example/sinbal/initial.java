@@ -37,19 +37,16 @@ public class initial extends AppCompatActivity {
         editor = UserInfo.edit();
 
 
+        final int inputSizeValue = UserInfo.getInt("inputSize", 0);
 
-        int inputSizeValue = UserInfo.getInt("inputSize", 0);
         if(inputSizeValue > 0){
             userSize.setText(Integer.toString(inputSizeValue));
         }
+
         int inputHeightValue = UserInfo.getInt("inputHeight", 0);
         if(inputHeightValue > 0){
             userHeight.setText(Integer.toString(inputHeightValue));
         }
-
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra("size",inputSizeValue);
-        startActivity(intent);
 
         //userHeight.setText(UserInfo.getString("inputHeight", ""));
         //userSize.setText(ShoeSize.getInt("InputSize", 0));
@@ -61,28 +58,37 @@ public class initial extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivityForResult(intent,sub);//액티비티 띄우기
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class); //변수 받아오기 추가 부분
+//        Intent intent = new Intent(this, MainActivity.class);
+                String SizeValue = userSize.getText().toString();
+                if(!SizeValue.isEmpty()) {//Empty 아닐떄만 실행
+                    int inputSizeValue = Integer.parseInt(SizeValue);
+                    intent.putExtra("size", inputSizeValue);
+                    startActivity(intent);//액티비티 띄우기
+                }
             }
         });
     }
     public void onPause(){
         super.onPause();
 
-        if(checkSize.isChecked() == true){
-            editor.putInt("inputSize", Integer.parseInt(userSize.getText().toString()));
-            editor.commit();
+        if(checkSize.isChecked()){
+            String sSize = userSize.getText().toString();
+            if(!sSize.isEmpty()){
+                editor.putInt("inputSize", Integer.parseInt(sSize));
+            }
         } else{
             editor.putInt("inputSize",0);
-            editor.commit();
         }
-        if(checkSize.isChecked() == true){
-            editor.putInt("inputHeight", Integer.parseInt(userHeight.getText().toString()));
-            editor.commit();
+        if(checkSize.isChecked()){
+            String sHeight = userHeight.getText().toString();
+            if(!sHeight.isEmpty()){
+                editor.putInt("inputHeight", Integer.parseInt(sHeight));
+            }
         } else{
             editor.putInt("inputHeight",0);
-            editor.commit();
         }
+        editor.commit();
 //        if(UserInfo.getBoolean("checkSize_enabled", false)){
 //            userSize.setText(UserInfo.getString("inputSize", ""));
 //            checkSize.setChecked(true);}
