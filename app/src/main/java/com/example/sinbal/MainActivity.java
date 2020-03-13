@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Intent intent = getIntent(); //변수 받아오기 추가 부분
         size = intent.getIntExtra("size",0);
         Log.d("MainActivity", "Size = "+size); //log에 띄워줌
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() {
             TextView distance22 = findViewById(R.id.distance2);
             TextView distance33 = findViewById(R.id.distance3);
+            TextView distance44 = findViewById(R.id.distance4);
 
 
             double final_size = MainActivity.this.size*2.5*2; // 2값 바꾸기
@@ -65,9 +67,11 @@ public class MainActivity extends AppCompatActivity {
 
                 distance22.setText(array[0].concat("cm"));
                 distance33.setText(array[1].concat("cm"));
+                distance44.setText(array[2].concat("cm"));
 
                 double distance2 = Double.parseDouble(array[0]);
                 double distance3 = Double.parseDouble(array[1]);
+                double distance4 = Double.parseDouble(array[2]);
 
                 if(distance2<final_size){
                     MyApplication myApp = (MyApplication) getApplication();

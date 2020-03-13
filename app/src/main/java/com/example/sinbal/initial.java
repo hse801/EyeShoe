@@ -61,6 +61,7 @@ public class initial extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class); //변수 받아오기 추가 부분
 //        Intent intent = new Intent(this, MainActivity.class);
                 String SizeValue = userSize.getText().toString();
+
                 if(!SizeValue.isEmpty()) {//Empty 아닐떄만 실행
                     int inputSizeValue = Integer.parseInt(SizeValue);
                     intent.putExtra("size", inputSizeValue);
