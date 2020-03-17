@@ -73,32 +73,75 @@ public class MainActivity extends AppCompatActivity {
                 double distance3 = Double.parseDouble(array[1]);
                 double distance4 = Double.parseDouble(array[2]);
 
-                if(distance2<final_size){
-                    MyApplication myApp = (MyApplication) getApplication();
-                    int num = myApp.getGlobalValue();
+                double distance24 = distance2/0.93969; //밑변길이를 cos20으로 나눈 값//대각선 길이
 
-                    if(num == 1) {
-
+                //벽 & 오르막
+                if(distance4<400){
+                    if(distance4>distance24){
+                        //오르막
                         final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
                         mp.start();
-
-                        myApp.setGlobalValue(0);
                     }
-                    if(distance2<10) {
-                        final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.close);
-                        mp.start();
+                    else{
+                        //벽
+                        if(distance2<final_size){
+                            MyApplication myApp = (MyApplication) getApplication();
+
+                            int num = myApp.getGlobalValue();
+
+                            if(num == 1) {
+
+                                final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
+                                mp.start();
+
+                                myApp.setGlobalValue(0);
+                            }
+                            if(distance2<10) {
+                                final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.close);
+                                mp.start();
+                            }
+
+                        }
+                        else if(distance2>final_size){
+                            MyApplication myApp = (MyApplication) getApplication();
+                            myApp.setGlobalValue(1);
+                        }
                     }
 
                 }
-                else if(distance2>30){
-                    MyApplication myApp = (MyApplication) getApplication();
-                    myApp.setGlobalValue(1);
+                //장애물
+                else{
+                    if(distance2<final_size){
+                        MyApplication myApp = (MyApplication) getApplication();
+
+                        int num = myApp.getGlobalValue();
+
+                        if(num == 1) {
+
+                            final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
+                            mp.start();
+
+                            myApp.setGlobalValue(0);
+                        }
+                        if(distance2<10) {
+                            final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.close);
+                            mp.start();
+                        }
+
+                    }
+                    else if(distance2>final_size){
+                        MyApplication myApp = (MyApplication) getApplication();
+                        myApp.setGlobalValue(1);
+                    }
                 }
 
-               if(distance3<10){
-                    final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.thunder);
+                //내리막
+                if(distance3>16.6){
+                    final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
                     mp.start();
                 }
+
+
             }
 
         });
