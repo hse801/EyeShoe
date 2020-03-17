@@ -76,10 +76,10 @@ public class MainActivity extends AppCompatActivity {
                 double distance24 = distance2/0.93969; //밑변길이를 cos20으로 나눈 값//대각선 길이
 
                 //벽 & 오르막
-                if(distance4<400){
+                if(distance4<30){
                     if(distance4>distance24){
                         //오르막
-                        final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
+                        final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.uphill);
                         mp.start();
                     }
                     else{
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
                             if(num == 1) {
 
-                                final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
+                                final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.wall);
                                 mp.start();
 
                                 myApp.setGlobalValue(0);
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                         }
-                        else if(distance2>final_size){
+                        else {
                             MyApplication myApp = (MyApplication) getApplication();
                             myApp.setGlobalValue(1);
                         }
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if(num == 1) {
 
-                            final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
+                            final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.block);
                             mp.start();
 
                             myApp.setGlobalValue(0);
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                     }
-                    else if(distance2>final_size){
+                    else {
                         MyApplication myApp = (MyApplication) getApplication();
                         myApp.setGlobalValue(1);
                     }
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //내리막
                 if(distance3>16.6){
-                    final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
+                    final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.downhill);
                     mp.start();
                 }
 
