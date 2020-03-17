@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 //벽 & 오르막
                 if(distance4<400){
                     if(distance4>distance24){
-                        //오르막 부분
+                        //오르막
                         final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.beep);
                         mp.start();
                     }
