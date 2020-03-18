@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             TextView distance44 = findViewById(R.id.distance4);
 
 
-            double final_size = MainActivity.this.size*2.5*2; // 2값 바꾸기
+            double final_size = MainActivity.this.size; // 2값 바꾸기
 
 
             public void onDataReceived(byte[] data, String message) { //데이터 수신용 코드 추가
@@ -85,34 +85,36 @@ public class MainActivity extends AppCompatActivity {
                     else{
                         //벽
                         if(distance2<final_size){
-                            MyApplication myApp = (MyApplication) getApplication();
+                            //MyApplication myApp = (MyApplication) getApplication();
 
-                            int num = myApp.getGlobalValue();
+                            //double num2 = myApp.getGlobalValue2(); //num 0, turn 0 //num 1, turn 1
+                            double num2 = 1.0;
 
-                            if(num == 1) {
-
+                            if(num2 == 1.0) {
+                                //num 1, turn 1
+                               // myApp.setGlobalValue2(0.0); //num1, turn 0
                                 final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.wall);
                                 mp.start();
 
-                                myApp.setGlobalValue(0);
                             }
                             if(distance2<10) {
                                 final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.close);
                                 mp.start();
                             }
 
+
                         }
-                        else {
-                            MyApplication myApp = (MyApplication) getApplication();
-                            myApp.setGlobalValue(1);
-                        }
+//                        else {
+//                            MyApplication myApp = (MyApplication) getApplication();
+//                            myApp.setGlobalValue2(1.0); //num 0, turn 1
+//                        }
                     }
 
                 }
                 //장애물
                 else{
-                    if(distance2<final_size){
-                        MyApplication myApp = (MyApplication) getApplication();
+                    MyApplication myApp = (MyApplication) getApplication();
+                    if(distance2<100){
 
                         int num = myApp.getGlobalValue();
 
@@ -121,7 +123,9 @@ public class MainActivity extends AppCompatActivity {
                             final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.block);
                             mp.start();
 
+                            Log.d("MainActivity", "Num1 = "+num);
                             myApp.setGlobalValue(0);
+                            Log.d("MainActivity", "Num2 = "+num);
                         }
                         if(distance2<10) {
                             final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.close);
@@ -130,7 +134,9 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                     else {
-                        MyApplication myApp = (MyApplication) getApplication();
+                        int num = myApp.getGlobalValue();
+                        Log.d("MainActivity", "Num3 = "+num);
+
                         myApp.setGlobalValue(1);
                     }
                 }
