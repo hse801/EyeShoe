@@ -102,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
                                 mp.start();
                             }
 
-
                         }
 //                        else {
 //                            MyApplication myApp = (MyApplication) getApplication();
