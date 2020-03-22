@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     private BluetoothSPP bt;
     int size;
+    boolean blockDetected = false;
+    boolean wallDetected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
             TextView distance44 = findViewById(R.id.distance4);
 
 
-            double final_size = MainActivity.this.size; // 2값 바꾸기
+            double finalSize = MainActivity.this.size; // 2값 바꾸기
 
 
             public void onDataReceived(byte[] data, String message) { //데이터 수신용 코드 추가
 
 
-                Log.d("MainActivity", "Final size = "+final_size);
+                Log.d("MainActivity", "Final size = "+ finalSize);
                 String[] array = message.split(",");
 
                 distance22.setText(array[0].concat("cm"));
@@ -73,70 +74,50 @@ public class MainActivity extends AppCompatActivity {
                 double distance3 = Double.parseDouble(array[1]);
                 double distance4 = Double.parseDouble(array[2]);
 
-                double distance24 = distance2/0.93969; //밑변길이를 cos20으로 나눈 값//대각선 길이
+                double distance5 = distance2/0.93969; //밑변길이를 cos20으로 나눈 값//대각선 길이
+               // double distance5 = distance2*1.5;
 
                 //벽 & 오르막
                 if(distance4<30){
-                    if(distance4>distance24){
+                    if(distance4>distance5){
                         //오르막
                         final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.uphill);
                         mp.start();
                     }
                     else{
                         //벽
-                        if(distance2<final_size){
-                            //MyApplication myApp = (MyApplication) getApplication();
-
-                            //double num2 = myApp.getGlobalValue2(); //num 0, turn 0 //num 1, turn 1
-                            double num2 = 1.0;
-
-                            if(num2 == 1.0) {
-                                //num 1, turn 1
-                               // myApp.setGlobalValue2(0.0); //num1, turn 0
+                        if(distance2 < finalSize){
+                            if(!wallDetected) {
+                                wallDetected = true;
                                 final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.wall);
                                 mp.start();
-
                             }
-                            if(distance2<10) {
+                            if(distance2 < 10) {
                                 final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.close);
                                 mp.start();
                             }
-
                         }
-//                        else {
-//                            MyApplication myApp = (MyApplication) getApplication();
-//                            myApp.setGlobalValue2(1.0); //num 0, turn 1
-//                        }
+                        else {
+                            wallDetected = false;
+                        }
                     }
-
                 }
                 //장애물
                 else{
-                    MyApplication myApp = (MyApplication) getApplication();
-                    if(distance2<100){
-
-                        int num = myApp.getGlobalValue();
-
-                        if(num == 1) {
+                    if(distance2<30){
+                        if(!blockDetected) {
+                            blockDetected = true;
 
                             final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.block);
                             mp.start();
-
-                            Log.d("MainActivity", "Num1 = "+num);
-                            myApp.setGlobalValue(0);
-                            Log.d("MainActivity", "Num2 = "+num);
                         }
                         if(distance2<10) {
                             final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.close);
                             mp.start();
                         }
-
                     }
                     else {
-                        int num = myApp.getGlobalValue();
-                        Log.d("MainActivity", "Num3 = "+num);
-
-                        myApp.setGlobalValue(1);
+                        blockDetected = false;
                     }
                 }
 
@@ -145,8 +126,6 @@ public class MainActivity extends AppCompatActivity {
                     final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.downhill);
                     mp.start();
                 }
-
-
             }
 
         });
@@ -227,4 +206,5 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }
+        super.onActivityResult(requestCode, resultCode, data);
     } }
