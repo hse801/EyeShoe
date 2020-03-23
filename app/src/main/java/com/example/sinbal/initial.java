@@ -22,6 +22,7 @@ public class initial extends AppCompatActivity {
     SharedPreferences UserInfo;
     SharedPreferences.Editor editor;
 
+
     public static final int sub = 1001; /*다른 액티비티를 띄우기 위한 요청코드(상수)*/
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class initial extends AppCompatActivity {
             }
         });
     }
+
     public void onPause(){
         super.onPause();
 
