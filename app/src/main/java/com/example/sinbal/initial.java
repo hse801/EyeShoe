@@ -29,7 +29,6 @@ public class initial extends AppCompatActivity {
         setContentView(R.layout.activity_initial);
 
         userSize = (EditText) findViewById(R.id.inputSize);
-        userHeight = (EditText) findViewById(R.id.inputHeight);
         checkSize = (CheckBox) findViewById(R.id.checkSize);
 
         checkSize.setChecked(true);
@@ -43,10 +42,10 @@ public class initial extends AppCompatActivity {
             userSize.setText(Integer.toString(inputSizeValue));
         }
 
-        int inputHeightValue = UserInfo.getInt("inputHeight", 0);
-        if(inputHeightValue > 0){
-            userHeight.setText(Integer.toString(inputHeightValue));
-        }
+//        int inputHeightValue = UserInfo.getInt("inputHeight", 0);
+//        if(inputHeightValue > 0){
+//            userHeight.setText(Integer.toString(inputHeightValue));
+//        }
 
         //userHeight.setText(UserInfo.getString("inputHeight", ""));
         //userSize.setText(ShoeSize.getInt("InputSize", 0));
@@ -81,14 +80,14 @@ public class initial extends AppCompatActivity {
         } else{
             editor.putInt("inputSize",0);
         }
-        if(checkSize.isChecked()){
-            String sHeight = userHeight.getText().toString();
-            if(!sHeight.isEmpty()){
-                editor.putInt("inputHeight", Integer.parseInt(sHeight));
-            }
-        } else{
-            editor.putInt("inputHeight",0);
-        }
+//        if(checkSize.isChecked()){
+//            String sHeight = userHeight.getText().toString();
+//            if(!sHeight.isEmpty()){
+//                editor.putInt("inputHeight", Integer.parseInt(sHeight));
+//            }
+//        } else{
+//            editor.putInt("inputHeight",0);
+//        }
         editor.commit();
 //        if(UserInfo.getBoolean("checkSize_enabled", false)){
 //            userSize.setText(UserInfo.getString("inputSize", ""));

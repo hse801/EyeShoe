@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="space.codejun.btcommunicatoin.MainActivity">
+    tools:context="space.code.btcommunicatoin.MainActivity">
 
 
     <Button
@@ -18,7 +18,11 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="32dp"
-        android:text="@string/connect" />
+        android:background="#005500"
+        android:text="@string/connect"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnSend"

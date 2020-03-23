@@ -24,22 +24,24 @@
 <!--        android:ems="10"-->
 <!--        android:inputType="textPersonName" />-->
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="191dp"
+        android:layout_height="59dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:background="#005500"
+        android:text="사용 안내"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
     <EditText
         android:id="@+id/inputSize"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="50dp"
         android:inputType="number"
         android:hint="발 사이즈를 입력하세요." />
-    <EditText
-        android:id="@+id/inputHeight"
-        android:layout_width="332dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:inputType="number"
-        android:hint="키를 입력하세요." />
 
     <CheckBox
         android:id="@+id/checkSize"
@@ -47,17 +49,22 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:text="Save"
+        android:buttonTint="#005500"
         android:textSize="24sp" />
 
     <Button
         android:id="@+id/start"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="230dp"
+        android:layout_height="88dp"
         android:layout_gravity="center"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
+        android:background="#005500"
         android:text="START"
+        android:textColor="#FFFFFF"
         android:textSize="36sp"
         android:textStyle="bold" />
+
+
 
 </LinearLayout>

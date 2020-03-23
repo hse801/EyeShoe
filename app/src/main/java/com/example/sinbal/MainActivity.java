@@ -25,10 +25,12 @@ public class MainActivity extends AppCompatActivity {
     boolean blockDetected = false;
     boolean wallDetected = false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         Intent intent = getIntent(); //변수 받아오기 추가 부분
         size = intent.getIntExtra("size",0);
@@ -161,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void onDestroy() {
         super.onDestroy();
