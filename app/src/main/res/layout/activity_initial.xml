@@ -25,15 +25,17 @@
 <!--        android:inputType="textPersonName" />-->
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/alert"
         android:layout_width="191dp"
         android:layout_height="59dp"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
         android:background="#005500"
         android:text="사용 안내"
+        android:onClick="btnClick"
         android:textColor="#FFFFFF"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        tools:ignore="OnClick" />
     <EditText
         android:id="@+id/inputSize"
         android:layout_width="332dp"

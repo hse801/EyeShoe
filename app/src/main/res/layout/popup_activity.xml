@@ -2,10 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="#eeeeee"
     android:orientation="vertical"
-    android:layout_width="300dp"
-    android:layout_marginLeft="50dp"
-    android:layout_marginRight="50dp"
-    android:layout_marginTop="50dp"
+    android:layout_width="match_parent"
+
+
     android:layout_height="wrap_content">
 
     <!-- 타이틀바 -->
@@ -17,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="53dp"
-            android:background="#ff7a00"
+            android:background="#005500"
             android:gravity="center"
             android:text="Notice"
             android:textColor="#fff"
@@ -64,7 +63,7 @@
             android:onClick="mOnClose"
             android:padding="16dp"
             android:text="확인"
-            android:textColor="#ff7a00"
+            android:textColor="#005500"
             android:textSize="15sp" />
     </LinearLayout>
     <!--// 닫기 버튼 -->

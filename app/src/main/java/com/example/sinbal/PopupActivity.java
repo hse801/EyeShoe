@@ -1,6 +1,7 @@
 package com.example.sinbal;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.MotionEvent;
@@ -11,12 +12,20 @@ import android.widget.Button;
 
 public class PopupActivity extends Activity{
 
+
     @Override
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         //타이틀바 없애기
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.popup_activity);
+    }
+
+    public void mOnClose(View v){
+        Intent intent = new Intent();
+        intent.putExtra("result","Close Popup");
+        setResult(RESULT_OK, intent);
+        finish();
     }
     @Override
     public boolean onTouchEvent (MotionEvent event){
@@ -26,6 +35,7 @@ public class PopupActivity extends Activity{
         }
         return true;
     }
+
 
     @Override
     public void onBackPressed () {
