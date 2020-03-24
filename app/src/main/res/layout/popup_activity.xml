@@ -18,7 +18,7 @@
             android:layout_height="53dp"
             android:background="#005500"
             android:gravity="center"
-            android:text="Notice"
+            android:text="사용 안내"
             android:textColor="#fff"
             android:textSize="20sp" />
     </LinearLayout>
@@ -26,20 +26,21 @@
 
     <!-- Notice -->
     <LinearLayout
-        android:padding="120dp"
+        android:padding="50dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
-            android:text = "안내"
             android:id="@+id/txtText"
-            android:textSize="15sp"
-            android:textColor="#000"
+            android:layout_width="297dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
             android:alpha="0.87"
             android:gravity="center"
-            android:layout_marginBottom="3dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:text="@string/UserGuide"
+            android:textColor="#000"
+            android:textSize="15sp" />
     </LinearLayout>
     <!-- Notice -->
 

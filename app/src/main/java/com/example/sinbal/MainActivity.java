@@ -2,6 +2,7 @@ package com.example.sinbal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.bluetooth.BluetoothSocket;
 import android.os.Bundle;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -18,6 +19,8 @@ import app.akexorcist.bluetotohspp.library.DeviceList;
 
 import android.media.MediaPlayer;
 
+import java.util.UUID;
+
 public class MainActivity extends AppCompatActivity {
 
     private BluetoothSPP bt;
@@ -29,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         Intent intent = getIntent(); //변수 받아오기 추가 부분
         size = intent.getIntExtra("size",0);
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             TextView distance22 = findViewById(R.id.distance2);
             TextView distance33 = findViewById(R.id.distance3);
             TextView distance44 = findViewById(R.id.distance4);
+            TextView distance66 = findViewById(R.id.distance6);
 
 
             double finalSize = MainActivity.this.size; // 2값 바꾸기
@@ -67,13 +70,16 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("MainActivity", "Final size = "+ finalSize);
                 String[] array = message.split(",");
 
+
                 distance22.setText(array[0].concat("cm"));
                 distance33.setText(array[1].concat("cm"));
                 distance44.setText(array[2].concat("cm"));
+                distance66.setText(array[3].concat("cm"));
 
                 double distance2 = Double.parseDouble(array[0]);
                 double distance3 = Double.parseDouble(array[1]);
                 double distance4 = Double.parseDouble(array[2]);
+                double distance6 = Double.parseDouble(array[3]);
 
                 double distance5 = distance2/0.93969; //밑변길이를 cos20으로 나눈 값//대각선 길이
                // double distance5 = distance2*1.5;
