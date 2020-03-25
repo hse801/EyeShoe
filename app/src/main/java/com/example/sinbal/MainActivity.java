@@ -2,7 +2,6 @@ package com.example.sinbal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.bluetooth.BluetoothSocket;
 import android.os.Bundle;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -19,7 +18,6 @@ import app.akexorcist.bluetotohspp.library.DeviceList;
 
 import android.media.MediaPlayer;
 
-import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     int size;
     boolean blockDetected = false;
     boolean wallDetected = false;
+    boolean downhillDetected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             TextView distance22 = findViewById(R.id.distance2);
             TextView distance33 = findViewById(R.id.distance3);
             TextView distance44 = findViewById(R.id.distance4);
-            TextView distance66 = findViewById(R.id.distance6);
+           // TextView distance66 = findViewById(R.id.distance6);
 
 
             double finalSize = MainActivity.this.size; // 2값 바꾸기
@@ -74,32 +73,32 @@ public class MainActivity extends AppCompatActivity {
                 distance22.setText(array[0].concat("cm"));
                 distance33.setText(array[1].concat("cm"));
                 distance44.setText(array[2].concat("cm"));
-                distance66.setText(array[3].concat("cm"));
+               // distance66.setText(array[3].concat("cm"));
 
                 double distance2 = Double.parseDouble(array[0]);
                 double distance3 = Double.parseDouble(array[1]);
                 double distance4 = Double.parseDouble(array[2]);
-                double distance6 = Double.parseDouble(array[3]);
+               // double distance6 = Double.parseDouble(array[3]);
 
                 double distance5 = distance2/0.93969; //밑변길이를 cos20으로 나눈 값//대각선 길이
                // double distance5 = distance2*1.5;
 
                 //벽 & 오르막
-                if(distance4<30){
-                    if(distance4>distance5){
+                if(distance4<500){
+                    if(distance4>finalSize){
                         //오르막
                         final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.uphill);
                         mp.start();
                     }
                     else{
                         //벽
-                        if(distance2 < finalSize){
-                            if(!wallDetected) {
+                        if(distance2 >finalSize){
+                            if(!wallDetected) { //벽 중복 알람 방지
                                 wallDetected = true;
                                 final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.wall);
                                 mp.start();
                             }
-                            if(distance2 < 10) {
+                            if(distance2 < 45) { //근접 경보
                                 final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.close);
                                 mp.start();
                             }
@@ -111,14 +110,14 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //장애물
                 else{
-                    if(distance2<30){
+                    if(distance2<finalSize){
                         if(!blockDetected) {
-                            blockDetected = true;
+                            blockDetected = true; //장애물 중복 알람 방지
 
                             final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.block);
                             mp.start();
                         }
-                        if(distance2<10) {
+                        if(distance2<30) { //근접 경보
                             final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.close);
                             mp.start();
                         }
@@ -129,9 +128,16 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 //내리막
-                if(distance3>16.6){
-                    final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.downhill);
-                    mp.start();
+                if(distance3>100) {
+                    if (!downhillDetected) {
+                        downhillDetected = true; //내리막길 중복 알람 방지
+
+                        final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.downhill);
+                        mp.start();
+                    }
+                    else {
+                        downhillDetected = false;
+                    }
                 }
             }
 
@@ -186,19 +192,19 @@ public class MainActivity extends AppCompatActivity {
             if (!bt.isServiceAvailable()) {
                 bt.setupService();
                 bt.startService(BluetoothState.DEVICE_OTHER); //DEVICE_ANDROID는 안드로이드 기기 끼리
-                setup();
+//                setup();
             }
         }
     }
 
-    public void setup() {
-        Button btnSend = findViewById(R.id.btnSend); //데이터 전송
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                bt.send("Text", true);
-            }
-        });
-    }
+//    public void setup() {
+//        Button btnSend = findViewById(R.id.btnSend); //데이터 전송
+//        btnSend.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                bt.send("Text", true);
+//            }
+//        });
+//    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == BluetoothState.REQUEST_CONNECT_DEVICE) {
@@ -208,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 bt.setupService();
                 bt.startService(BluetoothState.DEVICE_OTHER);
-                setup();
+//                setup();
             } else {
                 Toast.makeText(getApplicationContext()
                         , "Bluetooth was not enabled."

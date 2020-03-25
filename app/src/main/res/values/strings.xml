@@ -8,5 +8,6 @@
 오르막, 내리막, 벽에 접근시 각각 안내합니다.
 10cm 이내로 접근 시 경보음이 울립니다.
 블루투스 연결이 필요합니다.</string>
+    <string name="EyeShoe">EyeShoe</string>
 
 </resources>

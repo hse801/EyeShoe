@@ -25,12 +25,12 @@
         android:textStyle="bold" />
 
 
-    <Button
-        android:id="@+id/btnSend"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/send" />
+<!--    <Button-->
+<!--        android:id="@+id/btnSend"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:text="@string/send" />-->
 
     <TextView
         android:id="@+id/distance2"
@@ -53,12 +53,12 @@
         android:text="TextView"
         android:textSize="36sp" />
 
-    <TextView
-        android:id="@+id/distance6"
-        android:layout_width="match_parent"
-        android:layout_height="102dp"
-        android:text="TextView"
-        android:textSize="36sp" />
+<!--    <TextView-->
+<!--        android:id="@+id/distance6"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="102dp"-->
+<!--        android:text="TextView"-->
+<!--        android:textSize="36sp" />-->
 
 
 </LinearLayout>
