@@ -4,10 +4,10 @@
     <string name="send">보내기</string>
     <string name="UserGuide">이 앱은 시각장애인 분들을 위해 제작한 신발과 함께 사용하는 앱입니다.
 앱 시작 시 발 사이즈를 입력해주세요.
-전방의 장애물을 보폭 기준 다섯 걸음 전에 안내합니다.
+전방의 장애물을 보폭 기준 세 걸음 전에 안내합니다.
 오르막, 내리막, 벽에 접근시 각각 안내합니다.
-10cm 이내로 접근 시 경보음이 울립니다.
-블루투스 연결이 필요합니다.</string>
+15cm 이내로 접근 시 경보음이 울립니다.
+START 버튼을 누른 후 연결 버튼을 눌러 블루투스(THIS)를 연결해주세요.</string>
     <string name="EyeShoe">EyeShoe</string>
 
 </resources>

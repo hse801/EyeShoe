@@ -11,7 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class PopupActivity extends Activity{
-
+//사용 안내 팝업
 
     @Override
     protected void onCreate (Bundle savedInstanceState){

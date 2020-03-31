@@ -1,10 +1,5 @@
 package com.example.sinbal;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.widget.Toast;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class initial extends AppCompatActivity {
     Button button;
-
     EditText userSize;
     CheckBox checkSize;
     SharedPreferences UserInfo;
@@ -54,7 +48,6 @@ public class initial extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class); //변수 받아오기 추가 부분
-//        Intent intent = new Intent(this, MainActivity.class);
                 String SizeValue = userSize.getText().toString();
 
                 if (!SizeValue.isEmpty()) {//Empty 아닐떄만 실행
